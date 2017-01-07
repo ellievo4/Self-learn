@@ -1,0 +1,196 @@
+/*the whole body*/
+body {
+    font-family: 'Poiret One', cursive;
+}
+
+#container{
+    min-width: 1000px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/*header div*/
+#header {
+    height: 150px;
+}
+
+h1 a{
+    font-weight:bold;
+    font-size: 100px;
+    text-decoration: none;
+    color: red;
+}
+
+/*brand div*/
+#brand {
+    float: left;
+    padding-left: 20px;
+}
+
+/*searchBox div*/
+#searchBox {
+    float: right;
+    margin-top: 30px;
+    padding: 40px;
+    background: linear-gradient(white,black);
+    background: -moz-linear-gradient(white,black);
+    background: -o-linear-gradient(white,black);
+    background: -webkit-linear-gradient(white,black);
+}
+
+.text {
+    float: left;
+    font-size: 15px;
+    padding: 2px;
+    width: 200px;
+    color: crimson;
+    background: white url("imgs/mag.png") right center no-repeat;
+    border: 1px solid magenta;
+}
+
+.submit {
+    color: darkred;
+    font-size: 15px;
+    padding: 2px;
+    background: linear-gradient(black,white);
+    background: -moz-linear-gradient(black,white);
+    background: -o-linear-gradient(black,white);
+    background: -webkit-linear-gradient(black,white);
+}
+
+/*clear class*/
+.clear {
+    clear: both;
+}
+
+/*navigation div*/
+ul {
+    list-style: none;
+}
+
+#navigation {
+    height: 60px;
+    margin: 10px;
+    padding: 7px 0;
+    background-color: black;
+}
+
+#navigation ul li {
+    float: left;
+    padding: 0 30px;
+    height: 30px;
+    border-right: 1px solid red;
+}
+
+#navigation ul li:last-child {
+    border-right: none;
+}
+
+#navigation ul li a {
+    text-decoration: none;
+    font-size: 15px;
+    color: lightgrey;
+    line-height: 30px;
+    transition: font-size 0.3s linear;
+    -webkit-transition: font-size 0.3s linear;
+    -o-transition: font-size 0.3s linear;
+    -moz-transition: font-size 0.3s linear;
+}
+
+#navigation ul li a:hover, #navigation ul li a.active {
+    font-size: 20px;
+    font-weight: bold;
+    color: red;
+}
+
+/*intro div*/
+#intro {
+    height: 180px;
+    padding: 10px;
+    margin: 0 10px;
+    background: linear-gradient(black, red);
+    background: -moz-linear-gradient(black, red);
+    background: -o-linear-gradient(black, red);
+    background: -webkit-linear-gradient(black, red);
+}
+
+#intro h3 {
+    color: white;
+    font-size: 35px;
+    font-weight: normal;
+    margin-bottom: 5px;
+}
+
+#intro p {
+    color: white;
+    font-size: 20px;
+    text-align: justify;
+}
+
+/*sidebar class*/
+.sidebar {
+    width: 500px;
+    margin: 50px;
+    height: 500px;
+    background: linear-gradient(red,white);
+    background: -moz-linear-gradient(red,white);
+    background: -o-linear-gradient(red,white);
+    background: -webkit-linear-gradient(red,white);
+    border: 5px dotted black;
+}
+
+.sidebar h3 {
+    text-align: center;
+    font-size: 40px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;
+    color: black;
+    transition: font-size 0.3s ease;
+    -moz-transition: font-size 0.3s ease;
+    -o-transition: font-size 0.3s ease;
+    -webkit-transition: font-size 0.3s ease;
+}
+
+.sidebar ul li a:hover, .sidebar ul li a:active {
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+/*leftside and rightside div*/
+#leftside {
+    float:left;
+}
+
+#leftside ul li {
+    list-style-image: url("imgs/phone.png");
+    margin-top: 5px;
+}
+
+#rightside {
+    float: right;
+}
+
+#rightside ul li {
+    background: url("imgs/accessory.png") left center no-repeat;
+    padding-left: 35px;
+    margin-top: 5px;
+}
+
+/*foot class*/
+.foot {
+    height: 40px;
+    background: linear-gradient(white,black);
+    background: -moz-linear-gradient(white,black);
+    background: -o-linear-gradient(white,black);
+    background: -webkit-linear-gradient(white,black);
+    padding: 5px;
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+
+

@@ -1,0 +1,40 @@
+body {
+    text-align: center;
+    background-color: black;
+    color: red;
+}
+
+h1 {font-size: 400%;}
+h2 {font-size: 300%;}
+
+fieldset {
+    width:600px;
+    margin: auto;
+}
+    
+label {
+    float: left;
+    width: 250px;
+    clear: left;
+    text-align: right;
+    padding-right: 1em;
+}
+
+input {
+    float:left;
+}
+
+button {
+    clear: both;
+    margin:auto;
+    color: red;
+    display: block;
+}
+
+#output{
+    text-align: center;
+    font-size: 150%;
+    width: 400px;
+    margin: auto;
+}
+

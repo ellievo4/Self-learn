@@ -1,0 +1,198 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> SHOW YOUR SUPPORT </title>
+        <link rel="stylesheet" type="text/css" href="AmericaGame.css">
+        <script type="text/javascript" src="simpleGame.js"></script>
+        <script type="text/javascript">
+            var scene; 
+            var clinton;
+            var trump;
+            var arrow;
+            var trMP3;
+            var clMp3;
+            var btn1;
+            var btn2;
+            var btn3;
+            var scoreBoard;
+            var points;
+            var timer;
+            var time;
+            var bg;
+            
+            function init() {
+                <!-- initialize 3 buttons -->
+                btn1 = document.getElementById("btnAgain");
+                btn1.style.display = "none";
+                btn2 = document.getElementById("btnLoser");
+                btn2.style.display = "none";
+                btn3 = document.getElementById("btnTime");
+                btn3.style.display = "none";
+                
+                <!-- initialize game components: scene, 3 chars, score-track elems: html elem score, points so far; time elems: html elem time, time so far; background of game -->
+                scene = new Scene();
+                arrow = new Sprite(scene, "America.jpg", 50, 50);
+                trump = new Sprite(scene, "trump.jpg", 50, 50);
+                clinton = new Sprite(scene, "clinton.jpg", 50, 50);
+                scoreBoard = document.getElementById("scoreBoard");
+                points = 0;
+                timer = new Timer();
+                bg = new Sprite (scene, "eagle.jpg",620,480);
+                bg.setSpeed(0);
+                bg.setPosition(400,300);
+                
+                
+                <!-- set angle and speed of player arrow -->
+                arrow.setSpeed(0);
+                arrow.setAngle(0);
+                
+                
+                <!-- initialize sounds -->
+                trMP3 = new Sound("trump.mp3");
+                clMp3 = new Sound("clinton.mp3");
+                
+                
+                <!-- set keyboard interactions -->
+                arrow.checkKeys = function() {
+                    if (keysDown[K_A]) {arrow.changeAngleBy(-5);}
+                    
+                    if (keysDown[K_D]) {arrow.changeAngleBy(5);}
+                    
+                    if (keysDown[K_W]) {
+                        arrow.changeSpeedBy(1);
+                        if (arrow.speed > 10) {
+                            arrow.setSpeed(10);
+                        }                 
+                    }
+                    
+                    if (keysDown[K_S]) {
+                        arrow.changeSpeedBy(-1);
+                        if (arrow.speed < -3) {
+                            arrow.setSpeed(-3);
+                        }                 
+                    }
+                }
+                
+                
+                <!-- update current score and time -->
+                updateScore = function() {
+                    scoreBoard.innerHTML = "Your precious support(s): " + points + ". Time: " + time;
+                }
+                
+                
+                <!-- set up the timer of the game -->
+                checkTime = function() {
+                    time = timer.getElapsedTime()
+                    if (time > 20) {
+                        scene.stop();
+                        btn3.style.display = "block";
+                    }
+                    updateScore();
+                }    
+                
+                
+                <!-- reset when trump got hit by arrow -->
+                trump.reset = function() {
+                    this.setSpeed(0);
+                    this.setX(Math.random() * scene.width);
+                    this.setY(Math.random() * scene.height);
+                }
+                trump.reset();
+                
+                
+                <!-- set clinton to wriggle like a fly -->
+                clinton.wriggle = function() {
+                    newDir = (Math.random() * 30) - 15;
+                    this.changeAngleBy(newDir);
+                }
+                
+                
+                <!-- set clinton to move around -->
+                clinton.fly = function() {
+                    clinton.setSpeed(10);
+                    clinton.setX(Math.random() * scene.width);
+                    clinton.setY(Math.random() * scene.height);
+                }
+                clinton.fly();
+                
+                
+                <!-- set happening of collision when arrow hits trump and clinton -->
+                checkCollision = function() {
+                    if (arrow.collidesWith(trump)) {
+                        trMP3.play();
+                        trump.reset();
+                        points+=1;
+                        updateScore();
+                    }
+                    
+                    else if (arrow.collidesWith(clinton)) {
+                        clMp3.play();
+                        scene.stop();
+                        updateScore();
+                        btn2.style.display = "block";
+                    }
+                }
+                
+                
+                <!-- let the game begin -->
+                scene.start();
+            }
+            
+            
+            <!-- on click first button will lead to 2nd button to show up -->
+            function secondBtn() {
+                btn2.style.display = "none";
+                btn1.style.display = "block";
+            }
+            
+            
+            <!-- on click first button will lead to 3rd button to show up -->
+            function thirdBtn() {
+                btn3.style.display = "none";
+                btn1.style.display = "block";
+            }
+            
+            
+            <!-- on click 2nd button will refresh the page -->
+            function restart() {
+                document.location.href = "";
+            }
+            
+            
+            <!-- make those in init to work recursively -->
+            function update() {
+                scene.clear();
+                checkTime();
+                arrow.checkKeys();
+                clinton.wriggle();
+                checkCollision();
+                bg.update();
+                arrow.update();
+                clinton.update();
+                trump.update();
+            }
+        </script>
+    </head>
+    
+    
+    <body onload="init()">
+        <h1 style="color: black;">MAKE AMERICA GREAT AGAIN!</h1>
+        
+        <div id="scoreBoard"> Your precious support(s): . Time: </div>
+        
+        <div id="resetAll">
+            <button type="button" id="btnLoser" onclick="secondBtn()" style="display:none;" class="myButton1">
+                THIS IS NOT THE PLACE FOR ANTI-FAN
+            </button>
+            
+            <button type="button" id="btnTime" onclick="thirdBtn()" style="display:none;" class="myButton">
+                TIME IS UP
+            </button>
+            
+            <button type="button" id="btnAgain" onclick="restart()" style="display:none;" class="myButton">
+                I WANT TO SUPPORT MORE MORE MORE
+            </button>
+        </div>
+    </body>
+</html>

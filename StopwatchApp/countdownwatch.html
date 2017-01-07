@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Count Down Watch</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+      
+    <!-- Styling -->
+    <link href="styling.css" rel="stylesheet"> 
+      
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+      <div class="container-fluid">
+          <!--          create a nav pill on top-->
+          <ul class="nav nav-pills">
+            <li role="presentation">
+                <a href="clock.html"> Clock </a>
+            </li>
+            <li role="presentation">
+                <a href="stopwatch.html"> Stopwatch </a>  
+            </li>
+            <li role="presentation" class="active">
+                <a href="countdownwatch.html"> Count Down Watch </a>  
+            </li>
+          </ul>
+          
+          <div id="header"> Count Down Watch </div>
+          <div id="userinput"> 
+            <input type="text" id="uMin" maxlength="2">:<input type="text" id="uSec" maxlength="2">:<input type="text" id="uCsec" maxlength="2">
+          </div>
+          
+          <div id="cntdowndisplay" style="display:none">
+            <span id="cMin">00</span>:<span id="cSec">00</span>:<span id="cCsec">00</span>
+          </div>
+          
+          <div id="ctrlContainer" class="row">
+              <div class="col-xs-2 col-xs-offset-4">
+                  <div id="start" class="control"> Start </div>
+                  <div id="resume" class="control"> Resume </div>
+              </div>
+              <div class="col-xs-2">
+                  <div id="stop" class="control"> Stop </div>
+                  <div id="reset" class="control"> Reset </div>
+              </div>
+          </div>
+      </div>  
+      
+      
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Logic of the app -->
+    <script>
+        var iMin, iSec, iCsec, iTime;
+        var action;
+        var timeMin, timeSec, timeCsec;
+        var audio = new Audio('nokia_alert.mp3');
+        
+        //on load show start button
+        showHideABtn("#start");
+        
+        //click on start button
+        $("#start").click( function () {
+            //calc user input
+            iMin = parseInt(document.getElementById("uMin").value,10)||0;
+            iSec = parseInt(document.getElementById("uSec").value, 10)||0;
+            iCsec = parseInt(document.getElementById("uCsec").value, 10)||0;
+            iTime = iMin * 6000 + iSec * 100 + iCsec;
+            console.log(iTime);
+
+            //hide input div and show count down div
+            document.getElementById("userinput").style.display="none";
+            document.getElementById("cntdowndisplay").style.display="block";
+            //show stop button
+            showHideABtn("#stop");
+            //start action
+            startAction();
+        });
+            
+        //click on stop button
+        $("#stop").click( function () {
+            //stop the action
+            clearInterval(action);
+            //show resume and reset button
+            showHideBtns("#resume","#reset");
+        });
+        
+        //click on resume button
+        $("#resume").click( function () {
+            //show stop button
+            showHideABtn("#stop");
+            //start action 
+            startAction();
+        });
+        
+        //click on reset button
+        $("#reset").click( function () {
+            //reload page
+            location.reload();
+        });
+        
+        //functions
+        //show hide a button
+        function showHideABtn (x) {
+            $(".control").hide();
+            $(x).show();
+        }
+        
+        //show hide buttons
+        function showHideBtns (x,y) {
+            $(".control").hide();
+            $(x).show();
+            $(y).show();
+        }
+        
+        //start action
+        function startAction() {
+            action = setInterval ( function () {
+                iTime -= 1;
+                if (iTime == 0) {
+                    clearInterval(action);
+                    showHideABtn("#reset");
+                    audio.play();
+                }
+                updateTime();
+            }, 10)
+        }
+        
+        //update time
+        function updateTime() {
+            iMin = Math.floor(iTime/6000);
+            iSec = Math.floor((iTime%6000)/100);
+            iCsec = (iTime%6000)%100;
+            
+            $("#cMin").text(format(iMin));
+            $("#cSec").text(format(iSec)); 
+            $("#cCsec").text(format(iCsec));
+        }
+        
+        //format time
+        function format(x) {
+            if (x<10) { 
+                return '0' + x;
+            } else {
+                return x;
+            }
+        }
+        
+        
+    </script>  
+    
+  </body>
+</html>

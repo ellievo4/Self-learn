@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> GUESS A NUMBER </title>
+        <link rel="stylesheet" type="text/css" href="guessNumber.css"/>
+        <script type="application/javascript" src="guessNumber.js"></script>
+    </head>
+    
+    <body onload="init()">
+        <form action="">
+            <fieldset>
+                <div id="output"> ENTER YOUR NUMBER AND SEE IF YOU CAN MATCH MY NUMBER ^^o~~~</div>
+                <label for="txtGuess">Your number:</label>
+                <input type="text" id="txtGuess"/>
+                <br/> <br/> <br/> <br/>
+                <button type="button" onclick="checkGuess()">GUESS!</button>
+                <button type="button" id="btnAgain" onclick="init()" style="display:none;">PLAY AGAIN!</button>
+            </fieldset>
+        </form>
+    </body>
+</html>
